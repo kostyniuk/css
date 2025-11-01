@@ -1,0 +1,54 @@
+<div class="">
+  <section class="fixed-height">
+    Strict height (50vhsd)
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.</p>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.</p>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.</p>
+  </section>
+  <section class="min-height">
+    Flexible min-height (50vh)
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.</p>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.</p>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.</p>
+  </section>
+  <section class="max-height">
+    Limited max-height (50vh)
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.</p>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.</p>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.</p>
+  </section>
+</div>
+
+
+<style>
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  section {
+    border: 2px solid #333;
+    margin: 20px 0;
+    padding: 16px;
+    font-size: 1.2rem;
+
+    p {
+      padding: 50px;
+    }
+  }
+  .fixed-height {
+    height: 20vh;
+    background: #ffd6d6;
+  }
+  .min-height {
+    min-height: 20vh;
+    background: #d6ffd6;
+  }
+  .max-height {
+    max-height: 20vh;
+    background: #d6e5ff;
+    overflow: auto;
+  }
+</style>
