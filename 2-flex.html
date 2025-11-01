@@ -5,10 +5,6 @@
   <div class="item">Item 4</div>
   <div class="item">Item 5</div>
   <div class="item">Item 6</div>
-  <div class="item">Item 7</div>
-  <div class="item">Item 8</div>
-  <div class="item">Item 9</div>
-  <div class="item">Item 10</div>
 </div>
 
 <style>
@@ -17,15 +13,20 @@
     flex-direction: row;
     border: 2px solid #333;
     justify-content: space-between;
+    flex-wrap: wrap;
   }
   .item {
     border: 2px solid #333;
-    padding: 10px;
+    /* padding: 10px; */
     margin: 10px;
-    /* flex-grow: 1; This will make the item take up the remaining space */
-    /* flex-shrink: 0; This will prevent the item from shrinking */
-    /* flex-basis: 100px; This will set the initial size of the item */
-    /* flex: 1 1 100px; This is a shorthand for flex-grow, flex-shrink, and flex-basis */
-    /* flex: 1 1 100px; This is a shorthand for flex-grow, flex-shrink, and flex-basis */
+    flex-basis: 400px;
+    /* This will make the item take up the remaining space */
+    flex-grow: 1; 
+    /* This will prevent the item from shrinking */
+    flex-shrink: 0; 
+    /* This will set the initial size of the item */
+    /* flex-basis: 100px;  */
+    /* This is a shorthand for flex-grow, flex-shrink, and flex-basis */
+    /* flex: 1 1 100px;  */
   }
 </style>
