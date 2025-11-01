@@ -1,9 +1,9 @@
 <div class="container">
-  <div class="item">Item 1</div>
+  <div class="item justify-left">Item 1</div>
   <div class="item">Item 2</div>
   <div class="item">Item 3</div>
-  <div class="item">Item 4</div>
-  <div class="item">Item 5</div>
+  <div class="item ">Item 4</div>
+  <div class="item item-self-align">Item 5</div>
   <div class="item">Item 6</div>
 </div>
 
@@ -25,14 +25,21 @@
     border: 2px solid #333;
     /* padding: 10px; */
     margin: 10px;
-    flex-basis: 400px;
+    flex-basis: 200px;
     /* This will make the item take up the remaining space */
     flex-grow: 0; 
     /* This will prevent the item from shrinking */
     flex-shrink: 0; 
+    height: 100px;
     /* This will set the initial size of the item */
     /* flex-basis: 100px;  */
     /* This is a shorthand for flex-grow, flex-shrink, and flex-basis */
     /* flex: 1 1 100px;  */
+  }
+  .item-self-align {
+    align-self: center;
+  }
+  .justify-left {
+    margin-right: auto;
   }
 </style>
