@@ -1,0 +1,70 @@
+<div class="container">
+  <section class="min-height wavy-border">
+    Wavy border shape
+    <p>Works in Chrome already.</p>
+    <p>Pretty neat API.</p>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.</p>
+  </section>
+</div>
+
+
+<style>
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .wavy-border {
+    border-shape: shape(
+  from 1% 2%,
+
+  /* top */
+  curve to 20% 1% with 6% -1% / 14% 3%,
+  curve to 40% 3% with 26% -2% / 34% 5%,
+  curve to 60% 1% with 46% 2% / 54% -1%,
+  curve to 80% 3% with 66% 5% / 74% 0%,
+  curve to 99% 2% with 86% 2% / 94% -1%,
+
+  /* right — same pattern rotated */
+  curve to 98% 20% with 101% 6% / 97% 14%,
+  curve to 100% 40% with 102% 26% / 95% 34%,
+  curve to 98% 60% with 98% 46% / 101% 54%,
+  curve to 100% 80% with 95% 66% / 100% 74%,
+  curve to 98% 99% with 98% 86% / 101% 94%,
+
+  /* bottom — same pattern mirrored */
+  curve to 80% 100% with 94% 101% / 86% 97%,
+  curve to 60% 98% with 74% 102% / 66% 95%,
+  curve to 40% 100% with 54% 98% / 46% 101%,
+  curve to 20% 98% with 34% 95% / 26% 100%,
+  curve to 2% 99% with 14% 98% / 6% 101%,
+
+  /* left — same pattern rotated */
+  curve to 1% 80% with -1% 94% / 3% 86%,
+  curve to 3% 60% with -2% 74% / 5% 66%,
+  curve to 1% 40% with 2% 54% / -1% 46%,
+  curve to 3% 20% with 5% 34% / 0% 26%,
+  curve to 1% 2% with 2% 14% / -1% 6%,
+
+  close
+);
+  }
+
+  section {
+    width: 50%;
+    border: 2px solid #333;
+    margin: 20px 0;
+    padding: 16px;
+    font-size: 1.2rem;
+
+    p {
+      padding: 50px;
+    }
+  }
+  .min-height {
+    min-height: 20vh;
+    background: #d6ffd6;
+  }
+</style>
