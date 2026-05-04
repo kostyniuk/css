@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <title>Canvas Game</title>
+  <style>
+    body {
+      margin: 0;
+      display: grid;
+      place-items: center;
+      height: 100vh;
+      background: #222;
+      color: white;
+      font-family: sans-serif;
+    }
+
+    canvas {
+      background: #111;
+      border: 2px solid white;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="game" width="500" height="350"></canvas>
+
+  <script>
+    const canvas = document.querySelector("#game");
+    const ctx = canvas.getContext("2d");
+
+    const player = {
+      x: 230,
+      y: 160,
+      size: 30,
+      speed: 4
+    };
+
+    const coin = {
+      x: 100,
+      y: 100,
+      size: 20
+    };
+
+    let score = 0;
+    const keys = new Set();
+
+    document.addEventListener("keydown", (event) => {
+      keys.add(event.key);
+    });
+
+    document.addEventListener("keyup", (event) => {
+      keys.delete(event.key);
+    });
+
+    const movePlayer = () => {
+      if (keys.has("ArrowUp")) player.y -= player.speed;
+      if (keys.has("ArrowDown")) player.y += player.speed;
+      if (keys.has("ArrowLeft")) player.x -= player.speed;
+      if (keys.has("ArrowRight")) player.x += player.speed;
+
+      player.x = Math.max(0, Math.min(canvas.width - player.size, player.x));
+      player.y = Math.max(0, Math.min(canvas.height - player.size, player.y));
+    };
+
+    const isColliding = () => {
+      return (
+        player.x < coin.x + coin.size &&
+        player.x + player.size > coin.x &&
+        player.y < coin.y + coin.size &&
+        player.y + player.size > coin.y
+      );
+    };
+
+    const moveCoin = () => {
+      coin.x = Math.random() * (canvas.width - coin.size);
+      coin.y = Math.random() * (canvas.height - coin.size);
+    };
+
+    const drawPlayer = () => {
+      ctx.fillStyle = "deepskyblue";
+      ctx.fillRect(player.x, player.y, player.size, player.size);
+    };
+
+    const drawCoin = () => {
+      ctx.fillStyle = "gold";
+      ctx.beginPath();
+      ctx.arc(
+        coin.x + coin.size / 2,
+        coin.y + coin.size / 2,
+        coin.size / 2,
+        0,
+        Math.PI * 2
+      );
+      ctx.fill();
+    };
+
+    const drawScore = () => {
+      ctx.fillStyle = "white";
+      ctx.font = "20px sans-serif";
+      ctx.fillText(`Score: ${score}`, 15, 25);
+    };
+
+    const gameLoop = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      movePlayer();
+
+      if (isColliding()) {
+        score++;
+        moveCoin();
+      }
+
+      drawPlayer();
+      drawCoin();
+      drawScore();
+
+      requestAnimationFrame(gameLoop);
+    };
+
+    gameLoop();
+  </script>
+</body>
+</html>
