@@ -1,0 +1,90 @@
+<canvas id="c" width="800" height="400"></canvas>
+
+<script>
+const canvas = document.querySelector("#c");
+const ctx = canvas.getContext("2d");
+
+const lens = {
+  x: 390,
+  y: 200,
+  r: 140,
+  zoom: 1.8
+};
+
+const drawBase = () => {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  ctx.fillStyle = "white";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  ctx.fillStyle = "black";
+  ctx.font = "bold 72px Arial";
+  ctx.textBaseline = "middle";
+  ctx.fillText("HTML-in-canvas", 70, 200);
+};
+
+const drawLens = () => {
+  const { x, y, r, zoom } = lens;
+
+  const sourceSize = (r * 2) / zoom;
+  const sx = x - sourceSize / 2;
+  const sy = y - sourceSize / 2;
+
+  ctx.save();
+
+  // round mask
+  ctx.beginPath();
+  ctx.arc(x, y, r, 0, Math.PI * 2);
+  ctx.clip();
+
+  // zoomed in piece of canvas
+  ctx.drawImage(
+    canvas,
+    sx,
+    sy,
+    sourceSize,
+    sourceSize,
+    x - r,
+    y - r,
+    r * 2,
+    r * 2
+  );
+
+  // light dark on sides
+  const gradient = ctx.createRadialGradient(x, y, r * 0.55, x, y, r);
+  gradient.addColorStop(0, "rgba(255,255,255,0)");
+  gradient.addColorStop(1, "rgba(0,0,0,0.22)");
+  ctx.fillStyle = gradient;
+  ctx.fillRect(x - r, y - r, r * 2, r * 2);
+
+  ctx.restore();
+
+  // lens frame
+  ctx.beginPath();
+  ctx.arc(x, y, r, 0, Math.PI * 2);
+  ctx.lineWidth = 5;
+  ctx.strokeStyle = "rgba(0,0,0,0.75)";
+  ctx.stroke();
+
+  // inner shine
+  ctx.beginPath();
+  ctx.arc(x, y, r - 6, 0, Math.PI * 2);
+  ctx.lineWidth = 2;
+  ctx.strokeStyle = "rgba(255,255,255,0.45)";
+  ctx.stroke();
+};
+
+const draw = () => {
+  drawBase();
+  drawLens();
+};
+
+canvas.addEventListener("mousemove", (event) => {
+  const rect = canvas.getBoundingClientRect();
+  lens.x = event.clientX - rect.left;
+  lens.y = event.clientY - rect.top;
+  draw();
+});
+
+draw();
+</script>
