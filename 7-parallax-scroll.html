@@ -1,0 +1,98 @@
+<main>
+  <section class="hero">
+    <div class="sky"></div>
+    <div class="sun"></div>
+    <h1>CSS Parallax</h1>
+  </section>
+  <section class="content">
+    <p>Scroll to move each layer at a different speed.</p>
+  </section>
+</main>
+
+<style>
+  body {
+    margin: 0;
+    font-family: system-ui, sans-serif;
+    color: white;
+    background: #151515;
+  }
+
+  .hero {
+    position: relative;
+    display: grid;
+    min-height: 160vh;
+    place-items: start center;
+    overflow: clip;
+    background: linear-gradient(#6bb7ff, #f7c59f 60%, #2f6542);
+  }
+
+  .sky,
+  .sun {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+
+    /* Parallax: scroll position drives these animations instead of time. */
+    animation-duration: auto;
+    animation-timing-function: linear;
+    animation-timeline: scroll(root);
+    animation-fill-mode: both;
+  }
+
+  .sky {
+    background:
+      radial-gradient(circle at 20% 25%, white 0 3px, transparent 4px),
+      radial-gradient(circle at 75% 35%, white 0 2px, transparent 3px);
+
+    /* Parallax layer: moves slowly upward while the page scrolls down. */
+    animation-name: drift;
+  }
+
+  .sun {
+    width: 28vmin;
+    height: 28vmin;
+    margin: 12vh auto 0;
+    border-radius: 50%;
+    background: #ffd166;
+
+    /* Parallax layer: moves farther than the sky, so it feels closer. */
+    animation-name: rise;
+  }
+
+  h1 {
+    position: sticky;
+    top: 38vh;
+    margin: 0;
+    z-index: 1;
+    font-size: clamp(3rem, 10vw, 8rem);
+  }
+
+  .content {
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    padding: 2rem;
+    font-size: 2rem;
+  }
+
+  @keyframes drift {
+    /* Negative Y moves the layer upward. */
+    to {
+      translate: 0 -25vh;
+    }
+  }
+
+  @keyframes rise {
+    /* Positive Y moves the layer downward. */
+    to {
+      translate: 0 55vh;
+    }
+  }
+
+  @supports not (animation-timeline: scroll()) {
+    .sky,
+    .sun {
+      position: absolute;
+    }
+  }
+</style>

@@ -1,0 +1,78 @@
+<main>
+  <section class="stage">
+    <div class="track">
+      <div class="dot fast">Fast</div>
+      <div class="dot slow">Slow</div>
+    </div>
+  </section>
+  <section class="content">
+    <p>Both dots travel 60vh. The fast one finishes halfway through the scroll.</p>
+  </section>
+</main>
+
+<style>
+  body {
+    margin: 0;
+    font-family: system-ui, sans-serif;
+    background: #171717;
+    color: white;
+  }
+
+  .stage {
+    min-height: 180vh;
+    padding-top: 15vh;
+    background: linear-gradient(#202020, #455c3f);
+  }
+
+  .track {
+    position: sticky;
+    top: 15vh;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+  }
+
+  .dot {
+    display: grid;
+    width: 6rem;
+    aspect-ratio: 1;
+    place-items: center;
+    border-radius: 50%;
+    font-weight: 700;
+
+    /* Scroll-driven animation: same destination, different scroll ranges. */
+    animation-name: move-down;
+    animation-duration: auto;
+    animation-timing-function: linear;
+    animation-timeline: scroll(root);
+    animation-fill-mode: both;
+  }
+
+  .fast {
+    background: #ff6b6b;
+
+    /* Finishes the 60vh movement after only half the available scroll. */
+    animation-range: 0% 50%;
+  }
+
+  .slow {
+    background: #4dabf7;
+
+    /* Uses the whole scroll range to travel the same 60vh distance. */
+    animation-range: 0% 100%;
+  }
+
+  @keyframes move-down {
+    to {
+      translate: 0 60vh;
+    }
+  }
+
+  .content {
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    padding: 2rem;
+    font-size: 2rem;
+  }
+</style>
