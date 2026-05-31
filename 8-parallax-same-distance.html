@@ -6,7 +6,7 @@
     </div>
   </section>
   <section class="content">
-    <p>Both dots travel 60vh. The fast one finishes halfway through the scroll.</p>
+    <p>Both dots travel 5vh. The fast one finishes earlier.</p>
   </section>
 </main>
 
@@ -25,8 +25,10 @@
   }
 
   .track {
-    position: sticky;
+    position: fixed;
     top: 15vh;
+    left: 0;
+    right: 0;
     display: flex;
     justify-content: center;
     gap: 2rem;
@@ -40,7 +42,7 @@
     border-radius: 50%;
     font-weight: 700;
 
-    /* Scroll-driven animation: same destination, different scroll ranges. */
+    /* Scroll drives progress; the keyframes below decide the travel distance. */
     animation-name: move-down;
     animation-duration: auto;
     animation-timing-function: linear;
@@ -51,20 +53,21 @@
   .fast {
     background: #ff6b6b;
 
-    /* Finishes the 60vh movement after only half the available scroll. */
-    animation-range: 0% 50%;
+    /* Same distance as .slow, but completed during the first 25% of scroll. */
+    animation-range: 0% 25%;
   }
 
   .slow {
     background: #4dabf7;
 
-    /* Uses the whole scroll range to travel the same 60vh distance. */
-    animation-range: 0% 100%;
+    /* Same distance as .fast, but spread across the first 75% of scroll. */
+    animation-range: 0% 75%;
   }
 
   @keyframes move-down {
     to {
-      translate: 0 60vh;
+      /* Fixed distance: both dots move exactly 40px. */
+      translate: 0 40px;
     }
   }
 
