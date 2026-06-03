@@ -1,3 +1,15 @@
+<!-- Both move 40px.
+
+But .fast moves 40px during only the first 25% of scroll, so it appears faster.
+
+.slow moves 40px during the first 75% of scroll, so it appears slower.
+
+Clean mental model:
+
+translate = where the layer ends up
+animation-range / scroll distance = how quickly it gets there
+position strategy = how the layer participates in page layout -->
+
 <main>
   <section class="stage">
     <div class="track">
