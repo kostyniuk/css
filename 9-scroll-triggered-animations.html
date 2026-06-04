@@ -1,0 +1,70 @@
+<main>
+  <section class="wrapper">
+    <div class="block"></div>
+    <p>Both dots travel 5vh. The fast one finishes earlier.</p>
+  </section>
+  <section class="content">
+  </section>
+</main>
+
+<style>
+
+  body {
+    height: 200vh;
+    background-color: black;
+  }
+
+  main {
+    margin-top: 120vh;
+  }
+
+  .block {
+    width: 300px;
+    height: 300px;
+    border: solid;
+    border-color: burlywood;
+    background-image: url("assets/theo/theo-0.jpeg");
+
+    /*
+      Create a trigger named --t from this element's view progress.
+      It becomes active after the element has passed entry 120%, and stays
+      active until exit 20%. This decides when playback is triggered; it
+      does not make animation progress follow the scroll position.
+    */
+    timeline-trigger: --t view() entry 120% exit 20%;
+
+    /*
+      Attach the sunrise keyframes as a regular time-based animation.
+      It takes 0.35s, uses easing, and "both" applies the keyframe styles
+      before playback begins and after playback finishes.
+    */
+    animation: sunrise 0.35s ease both;
+
+    /*
+      Connect this animation to --t. When --t activates, play sunrise
+      forwards; when --t deactivates, play it backwards.
+    */
+    animation-trigger: --t play-forwards play-backwards;
+  }
+
+  .wrapper {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+  p {
+    color: white
+  }
+
+@keyframes sunrise {
+  /*
+    Define only the faded starting state. The missing end state is the
+    block's normal computed opacity of 1, so forwards reveals the image
+    and backwards fades it toward 0.6.
+  */
+  from {
+    opacity: 0.6;
+  }
+}
+
+</style>
