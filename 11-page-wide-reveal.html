@@ -1,0 +1,66 @@
+<main>
+  <section class="notes">
+    <h1>Range names</h1>
+    <p>entry and exit are roughly the element crossing a viewport edge.</p>
+    <p>For normal smaller elements, entry distance is about the element height.</p>
+    <p>For normal smaller elements, exit distance is about the element height.</p>
+    <p>cover is the whole overlap trip: viewport height plus element height.</p>
+    <p>So cover 50% is halfway through the full visible journey.</p>
+  </section>
+
+  <section>
+    <h1>Page-wide reveal</h1>
+    <p>Every text element uses the same scroll-driven reveal.</p>
+  </section>
+
+  <section>
+    <h2>First section</h2>
+    <p>The animation is not attached to the page itself.</p>
+    <p>Each text element gets its own view timeline.</p>
+  </section>
+
+  <section>
+    <h2>Second section</h2>
+    <p>Scroll down and each line fades in as it enters the viewport.</p>
+    <p>Scroll back up and the reveal reverses.</p>
+  </section>
+</main>
+
+<style>
+  body {
+    margin: 0;
+    font-family: sans-serif;
+  }
+
+  section {
+    min-height: 100vh;
+    display: grid;
+    place-content: center;
+    padding: 2rem;
+  }
+
+  :where(h1, h2, p) {
+    animation: text-reveal linear both;
+    animation-timeline: view();
+    animation-range: cover 0% cover 100%;
+  }
+
+  @keyframes text-reveal {
+    0% {
+      opacity: 0.15;
+      translate: 0 1.5rem;
+    }
+
+    20%,
+    80% {
+      opacity: 1;
+      translate: 0 0;
+    }
+
+    100% {
+      opacity: 0.15;
+      translate: 0 -1.5rem;
+    }
+  }
+
+</style>
