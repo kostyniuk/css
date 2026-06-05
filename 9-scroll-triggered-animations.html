@@ -1,7 +1,7 @@
 <main>
   <section class="wrapper">
-    <div class="block"></div>
-    <p>Both dots travel 5vh. The fast one finishes earlier.</p>
+    <div class="block animated"></div>
+    <p class="animated">Both dots travel 5vh. The fast one finishes earlier.</p>
   </section>
   <section class="content">
   </section>
@@ -18,20 +18,15 @@
     margin-top: 120vh;
   }
 
-  .block {
-    width: 300px;
-    height: 300px;
-    border: solid;
-    border-color: burlywood;
-    background-image: url("assets/theo/theo-0.jpeg");
 
+  .animated {
     /*
       Create a trigger named --t from this element's view progress.
       It becomes active after the element has passed entry 120%, and stays
       active until exit 20%. This decides when playback is triggered; it
       does not make animation progress follow the scroll position.
     */
-    timeline-trigger: --t view() entry 120% exit 20%;
+    timeline-trigger: --t view() entry 150% exit 50%;
 
     /*
       Attach the sunrise keyframes as a regular time-based animation.
@@ -45,6 +40,14 @@
       forwards; when --t deactivates, play it backwards.
     */
     animation-trigger: --t play-forwards play-backwards;
+  }
+
+  .block {
+    width: 300px;
+    height: 300px;
+    border: solid;
+    border-color: burlywood;
+    background-image: url("assets/theo/theo-0.jpeg");
   }
 
   .wrapper {
@@ -63,7 +66,7 @@
     and backwards fades it toward 0.6.
   */
   from {
-    opacity: 0.6;
+    opacity: 0.3;
   }
 }
 

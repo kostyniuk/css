@@ -1,0 +1,165 @@
+<main>
+  <section class="intro">
+    <p class="eyebrow">Scroll-driven animation</p>
+    <h1>Keep scrolling to reveal the story.</h1>
+  </section>
+
+  <section class="story">
+    <figure class="image-reveal">
+      <img src="assets/theo/theo-0.jpeg" alt="Theo looking toward the camera">
+    </figure>
+
+    <div class="text-reveal">
+      <p class="eyebrow">A quiet entrance</p>
+      <h2>Motion should support the image, not compete with it.</h2>
+      <p>
+        The image and text reveal as they move through the viewport. Stop
+        scrolling and the animation stops too.
+      </p>
+    </div>
+  </section>
+</main>
+
+<style>
+  :root {
+    color-scheme: dark;
+    --background: #0d0e0c;
+    --text: #f1eee6;
+    --muted: #aaa69d;
+    --accent: #b9d7a8;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    background: var(--background);
+    color: var(--text);
+    font-family: Georgia, "Times New Roman", serif;
+  }
+
+  .intro {
+    min-height: 110vh;
+    display: grid;
+    align-content: center;
+    gap: 1rem;
+    width: min(88vw, 70rem);
+    margin: 0 auto;
+  }
+
+  .intro h1 {
+    max-width: 12ch;
+    margin: 0;
+    font-size: clamp(3rem, 8vw, 7rem);
+    font-weight: 400;
+    line-height: 0.95;
+  }
+
+  .eyebrow {
+    margin: 0;
+    color: var(--accent);
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .story {
+    min-height: 150vh;
+    width: min(88vw, 70rem);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: minmax(0, 1.25fr) minmax(16rem, 0.75fr);
+    align-items: center;
+    gap: clamp(2rem, 7vw, 7rem);
+  }
+
+  .image-reveal {
+    margin: 0;
+    overflow: hidden;
+
+    /*
+      Scroll position drives this animation directly. It starts after the
+      image has entered 10% of the viewport and finishes around the middle.
+    */
+    animation: image-reveal linear both;
+    animation-timeline: view();
+    animation-range: entry 10% cover 40%;
+  }
+
+  .image-reveal img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+  }
+
+  .text-reveal {
+    /*
+      The text has its own view timeline, so its progress follows the text
+      block's position rather than the image's position.
+    */
+    animation: text-reveal linear both;
+    animation-timeline: view();
+    animation-range: entry 0% cover 35%;
+  }
+
+  .text-reveal h2 {
+    margin: 1rem 0 1.25rem;
+    font-size: clamp(2rem, 4vw, 4rem);
+    font-weight: 400;
+    line-height: 1;
+  }
+
+  .text-reveal > p:last-child {
+    max-width: 32rem;
+    margin: 0;
+    color: var(--muted);
+    font-family: ui-sans-serif, system-ui, sans-serif;
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+
+  @keyframes image-reveal {
+    from {
+      opacity: 0.35;
+      scale: 0.8;
+      clip-path: inset(8%);
+    }
+
+    to {
+      opacity: 1;
+      scale: 1;
+      clip-path: inset(0);
+    }
+  }
+
+  @keyframes text-reveal {
+    from {
+      opacity: 0.15;
+      translate: 0 2rem;
+    }
+
+    to {
+      opacity: 1;
+      translate: 0 0;
+    }
+  }
+
+  @media (max-width: 700px) {
+    .story {
+      grid-template-columns: 1fr;
+      align-content: center;
+      gap: 2.5rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .image-reveal,
+    .text-reveal {
+      animation: none;
+    }
+  }
+</style>
