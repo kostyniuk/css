@@ -1,0 +1,24 @@
+<main>
+  <div class="grid">
+    <div class="grid-item">Range names</div>
+    <div class="grid-item">entry and exit are roughly the element crossing a viewport edge.</div>
+    <div class="grid-item">For normal smaller elements, entry distance is about the element height.</div>
+    <div class="grid-item">For normal smaller elements, exit distance is about the element height.</div>
+    <div class="grid-item">cover is the whole overlap trip: viewport height plus element height.</div>
+    <div class="grid-item">So cover 50% is halfway through the full visible journey.</div>
+  </div>
+</main>
+
+<style>
+  body {
+    margin: 0;
+    font-family: sans-serif;
+  }
+
+  .grid {
+  display: grid-lanes;
+  gap: 10px;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+}
+
+</style>
